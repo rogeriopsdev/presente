@@ -7,13 +7,15 @@ def home(request):
 
 def cad_aluno(request):
     form =AlunoForms(request.POST)
+    alunos =Aluno.objects.all()
+
     if request.method == "POST":
         form =AlunoForms(request.POST, request.FILES)
         if form.is_valid():
             obj = form.save()
             obj.save()
             form=AlunoForms()
-    context = {'form':form}
+    context = {'form':form, 'alunos':alunos}
     return render(request,'presente/cad_aluno.html', context)
 
 def mostrar_aluno(request):

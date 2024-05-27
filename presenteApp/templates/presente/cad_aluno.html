@@ -9,11 +9,11 @@
 
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-
+    {% load crispy_forms_tags %}
     <div class="">
-    {{ form.nome_aluno}}
-    {{ form.matricula_aluno }}
-    {{ form.cidade_aluno }}
+    {{ form.nome_aluno |as_crispy_field}}
+    {{ form.matricula_aluno|as_crispy_field }}
+    {{ form.cidade_aluno|as_crispy_field }}
         </div>
     <input type="submit" value="Cadastrar" class='btn btn-primary'>
 </form>

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from presenteApp.forms import AlunoForms
 from presenteApp.models import Aluno, Turma
 
@@ -17,6 +17,24 @@ def cad_aluno(request):
             form=AlunoForms()
     context = {'form':form, 'alunos':alunos}
     return render(request,'presente/cad_aluno.html', context)
+
+
+def editar_aluno(request,id):
+    aluno =get_object_or_404(Aluno, pk =id)
+    form =AlunoForms(instance=aluno)
+    alunos = Aluno.objects.all()
+    context ={'aluno':aluno, 'alunos':alunos, 'form':form}
+    if request.method =="POST":
+        form=AlunoForms(request.POST, request.FILES, instance=aluno)
+        if form.is_valid():
+            form.save()
+            return redirect('cad_aluno')
+        else:
+            return render(request,'presente/editar_aluno.html', context)
+    else:
+        return render(request, 'presente/editar_aluno.html', context)
+
+
 
 def mostrar_aluno(request):
     alunos = Aluno.objects.all()

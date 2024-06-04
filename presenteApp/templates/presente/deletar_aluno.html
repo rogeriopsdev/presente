@@ -1,6 +1,7 @@
 {% extends 'presente/base.html' %}
 
 {% block conteudo %}
+
 <form method="POST" enctype="multipart/form-data" class="mt-5 mb-5 my-5 mx-5">
     {% csrf_token %}
     {% load crispy_forms_tags %}
@@ -18,7 +19,7 @@
             {{ form.cidade_aluno|as_crispy_field }}
         </div>
     </div>
-    <input type="submit" value="Editar" class='btn btn-warning'>
+    <input type="submit" value="Deletar" class='btn btn-danger'>
 </form>
 
 

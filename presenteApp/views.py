@@ -3,7 +3,7 @@ from presenteApp.forms import AlunoForms
 from presenteApp.models import Aluno, Turma
 
 def home(request):
-    return render(request,'presente/home.html')
+    return render(request,'presente/index.html')
 
 def cad_aluno(request):
     form =AlunoForms(request.POST)
@@ -34,6 +34,16 @@ def editar_aluno(request,id):
     else:
         return render(request, 'presente/editar_aluno.html', context)
 
+def deletar_aluno(request, id):
+    aluno = get_object_or_404(Aluno,pk=id)
+    form = AlunoForms(instance=aluno)
+    alunos = Aluno.objects.all()
+    if request.method == "POST":
+        aluno.delete()
+        return redirect('cad_aluno')
+    return render(request,'presente/deletar_aluno.html',{"alunos":alunos,
+                                                         "aluno":aluno,
+                                                         "form":form})
 
 
 def mostrar_aluno(request):

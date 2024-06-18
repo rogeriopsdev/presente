@@ -6,7 +6,7 @@
     {% load crispy_forms_tags %}
     <div class="row">
         <div class="col-3">
-            foto
+            {{ form.foto_aluno|as_crispy_field }}
         </div>
         <div class="col-3">
             {{ form.nome_aluno |as_crispy_field }}
@@ -26,6 +26,7 @@
     <thead class="table table-primary">
     <tr>
         <td>Id do aluno</td>
+        <td>Foto</td>
         <td>Nome aluno</td>
         <td>Matrícula</td>
         <td>Cidade</td>
@@ -37,6 +38,7 @@
     {% for aluno in alunos %}
         <tr>
             <td>{{ aluno.id_aluno }}</td>
+            <td><img src="{{ aluno.foto_url }}" alt="{{ aluno.nome_aluno }}"></td>
             <td>{{ aluno.nome_aluno }}</td>
             <td>{{ aluno.matricula_aluno }}</td>
             <td>{{ aluno.cidade_aluno }}</td>
